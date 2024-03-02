@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: green-app
+      env: green
+  template:
+    metadata:
+      labels:
+        app: green-app
+        env: green
+    spec:
+      containers:
+      - name: green
+        image: ahmedeldesoki/tomcat:green
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

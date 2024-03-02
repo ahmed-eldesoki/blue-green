@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blue-app
+      env: blue
+  template:
+    metadata:
+      labels:
+        app: blue-app
+        env: blue
+    spec:
+      containers:
+      - name: blue
+        image: ahmedeldesoki/tomcat:blue
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
