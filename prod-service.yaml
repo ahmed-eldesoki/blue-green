@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tomcat-test-blue
-  namespace: rollingupdate
+  name: tomcat-prod
 spec:
   selector:
-    app: blue-app
     env: blue
   ports:
   - protocol: TCP
     port: 8080
     targetPort: 8080
+  type: LoadBalancer
