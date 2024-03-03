@@ -19,7 +19,7 @@ pipeline {
             steps {
              script {
                     def serviceIP = sh(script: "kubectl get services tomcat-test-blue -o jsonpath='{.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
-                    def curlOutput = sh(script: "curl -s http://${serviceIP}:8080 | grep -oP '<h1>\\K(.*?)(?=<\\/h1>)'", returnStatus: true).trim()
+                    def curlOutput = sh(script: "curl -s http://${serviceIP}:8080 | grep -oP '<h1>\\K(.*?)(?=<\\/h1>)'", returnStdout: true).trim()
                     echo "Exit status: ${curlOutput}"
                     if (curlOutput == 'Hello from blue app') {
                         echo "it's the blue app"
