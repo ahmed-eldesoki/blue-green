@@ -14,6 +14,7 @@ pipeline {
                kubectl get pods -l app=blue-app
                     '''
    }
+    }
    stage('rolling update to green app') {
             steps {
           sh '''
