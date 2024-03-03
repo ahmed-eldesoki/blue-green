@@ -14,7 +14,7 @@ pipeline {
           sh '''
                kubectl apply -f ./blue-app
                sleep 10
-               kubectl get pods -l app=blue
+               kubectl get pods -l app=blue-app
                     '''
    }
   }
