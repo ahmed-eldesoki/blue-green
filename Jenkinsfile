@@ -37,7 +37,7 @@ pipeline {
                     '''
    }
   }
-  stage('testing the new deplyment') {
+  stage('testing the new deplyment & rollback if fails') {
             steps {
              script {
                     try {
@@ -45,9 +45,9 @@ pipeline {
                     def curlOutput = sh(script: "curl -s http://${serviceIP}:8080 | grep -oP '<h1>\\K(.*?)(?=<\\/h1>)'", returnStdout: true).trim()
                     echo "Exit status: ${curlOutput}"
                     if (curlOutput == 'Hello from blue app') {
-                        echo "it's the blue app"
+                        echo "it's the green app"
                     } else {
-                        error "the blue app in not up"
+                        error "the green app in not up"
                     }
                     } catch (Exception e) {
                         sh 'kubectl rollout undo deploy/blue-app'
