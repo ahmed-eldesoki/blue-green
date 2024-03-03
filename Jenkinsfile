@@ -33,6 +33,7 @@ pipeline {
             steps {
           sh '''
                kubectl patch deployment blue-app -p '{"spec": {"template": {"spec": {"containers": [{"name": "blue", "image": "ahmedeldesoki/tomcat:green"}]}}}}'
+               sleep 10
                     '''
    }
   }
