@@ -12,10 +12,7 @@ pipeline {
    
      
           sh '''
-                cd backend
-                npm install
-                npm run build
-                ls -lh
+               kubectl get pods
                     '''
    }
   }
