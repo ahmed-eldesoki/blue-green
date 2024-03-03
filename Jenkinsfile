@@ -63,6 +63,16 @@ pipeline {
                     '''
    }
   }
+  stage('Sending notifications') {
+            steps {
+                emailext (
+                    subject: "Blue Green Deployment Status",
+                    body: "The Deployment status is: ${currentBuild.currentResult}",
+                    to: "ahmedeldesoki78@gmail.com",
+                    attachLog: true
+                )
+            }
+        }
   }
   
 }
