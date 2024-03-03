@@ -23,7 +23,7 @@ pipeline {
            script {
                     def serviceIP = sh(script: "kubectl get services tomcat-prod -o jsonpath='{.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
                     sh '''
-                    echo "Please hit this url for the blue-app http://${serviceIP}:8080"
+                    echo "The service URL is: http://${serviceIP}:8080"
                     sleep 15
                     '''
                 }
@@ -47,7 +47,7 @@ pipeline {
                     
                     def curlOutput = sh(script: "kubectl exec -it curl-pod -- curl -s http://tomcat-test-green:8080 | grep -oP '<h1>\\K(.*?)(?=<\\/h1>)'", returnStdout: true).trim()
                     
-                    if (curlOutput == 'Hello from Green app') {
+                    if (curlOutput == 'Hello from green app') {
                         echo "it's the Green app"
                     } else {
                         error "the Green app in not up"
