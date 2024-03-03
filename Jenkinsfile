@@ -22,10 +22,10 @@ pipeline {
         steps {
            script {
                     def serviceIP = sh(script: "kubectl get services tomcat-prod -o jsonpath='{.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
-                    sh '''
+                   
                     echo "The service URL is: http://${serviceIP}:8080"
                     sleep 15
-                    '''
+                    
                 }
    }
    }
