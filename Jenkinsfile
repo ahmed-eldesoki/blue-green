@@ -40,6 +40,7 @@ pipeline {
   stage('testing the new deplyment') {
             steps {
              script {
+                    try {
                     def serviceIP = sh(script: "kubectl get services tomcat-test-blue -o jsonpath='{.status.loadBalancer.ingress[0].ip}'", returnStdout: true).trim()
                     def curlOutput = sh(script: "curl -s http://${serviceIP}:8080 | grep -oP '<h1>\\K(.*?)(?=<\\/h1>)'", returnStdout: true).trim()
                     echo "Exit status: ${curlOutput}"
@@ -47,6 +48,10 @@ pipeline {
                         echo "it's the blue app"
                     } else {
                         error "the blue app in not up"
+                    }
+                    } catch (Exception e) {
+                        sh 'kubectl rollout undo deploy/blue-app'
+
                     }
                 }
    }
