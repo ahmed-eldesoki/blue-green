@@ -12,7 +12,9 @@ pipeline {
    
      
           sh '''
-               kubectl get pods
+               kubectl apply -f ./blue-app
+               sleep 10
+               kubectl get pods -l app=blue
                     '''
    }
   }
